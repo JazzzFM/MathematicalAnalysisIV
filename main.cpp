@@ -30,49 +30,18 @@ int main ( ){
   
 	timestamp();
 	cout << "\n";
-  	cout << "BERNSTEIN_POLYNOMIAL_PRB\n";
-  	cout << "  Test de la biblioteca BERNSTEIN_POLYNOMIAL.\n";
+  	cout << "Test de la biblioteca BERNSTEIN_POLYNOMIAL.\n";
   
-  	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  	bernstein_matrix_test();
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
-  	bernstein_matrix_determinant_test();
-  	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-
-  	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  	bernstein_matrix_inverse_test();
-  	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  
-  	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  	bernstein_poly_01_test();
-  	std::this_thread::sleep_for(std::chrono::milliseconds(100));
-  
-  	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  	bernstein_poly_01_test2();
-  	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-  
-  	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  	bernstein_poly_01_matrix_test();
-
-  	std::this_thread::sleep_for(std::chrono::milliseconds(1000));  
-  	bernstein_poly_ab_test(); 
-  	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-
+  	// bernstein_matrix_test();
+  	// bernstein_matrix_determinant_test();
+  	// bernstein_matrix_inverse_test();
+  	// bernstein_poly_01_test();
+     	// bernstein_poly_01_matrix_test();
+	
+	bernstein_poly_ab_test(); 
   	bernstein_poly_ab_approx_test();
-  	td::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  
-  	bernstein_to_legendre_test();
-  	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-
- 	bernstein_to_power_test();
-	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-  
-	bernstein_vandermonde_test();
- 	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-  
+	
   	cout << "\n";
-  	cout << "BERNSTEIN_POLYNOMIAL_PRB\n";
   	cout << " Fin de ejecución.\n";
   	cout << " \n";
   	timestamp();
@@ -100,77 +69,15 @@ void bernstein_matrix_test(){
   return;
 }
 
-void bernstein_matrix_test2(){
-// Propósito: BERNSTEIN_MATRIX_TEST2 prueba BERNSTEIN_MATRIX.
-//  Discusión:
-// 	Aquí usamos la matriz de Bernstein para describir 
-// 	un polinomio de Bernstein en términos de los monomios clásicos.
-
-  double *a;
-  double *ax;
-  int i;
-  int k;
-  int n;
-  double *x;
-    
-   cout << "\n";
-   cout << "PRUEBA06\n";
-   cout << " BERNSTEIN_MATRIX devuelve una matriz A que\n";
-   cout << " transforma un vector coeficiente polinomial\n";
-   cout << " de la base de Bernstein a la base de potencia.\n";
-   cout << " Podemos usar esto para obtener valores explícitos de\n";
-   cout << " Coeficientes polinómicos de Bernstein de cuarto grado como\n";
-   cout << "\n";
-   cout << " b(4,K)(X) = C4 * x^4\n";
-   cout << " + C3 * x^3\n";
-   cout << " + C2 * x^2\n";
-   cout << " + C1 * x\n";
-   cout << " + C0 * 1\n";
-
-  n = 5;
-  cout << "\n";
-  cout << "     K       C4           C3            C2";
-  cout << "            C1             C0\n";
-  cout << "\n";
-
-  a = bernstein_matrix(n);
-  x = new double[n];
-
-  for(k = 0; k < n; k++){
-  	
-	for(i = 0; i < n; i++){
-      	    x[i] = 0.0;
-         }
-    
-    x[k] = 1.0;
-    ax = r8mat_mv_new(n, n, a, x );
-
-    cout << "  " << setw(4) << k << "  ";
-    for(i = 0; i < n; i++){
-
-      cout << "  " << setw(14) << ax[i];
-    }
-    
-	cout << "\n";
-  }
-
-  delete [] a;
-  delete [] ax;
-  delete [] x;
-
-  return;
-}
 
 void bernstein_matrix_determinant_test(){
 //  Propósito:  
 //  	BERNSTEIN_MATRIX_DETERMINANT_TEST prueba BERNSTEIN_MATRIX_DETERMINANT.
 
-
   double *a;
   double a_norm_frobenius;
   double d1;
   int n;
-   
 
    cout << "\n";
    cout << "BERNSTEIN_MATRIX_DETERMINANT_TEST\n";
@@ -182,11 +89,8 @@ void bernstein_matrix_determinant_test(){
    cout << "\n";
 
   for(n = 5; n <= 15; n++){
-
     a = bernstein_matrix(n);
-    
     a_norm_frobenius = r8mat_norm_fro(n, n, a);
-
     d1 = bernstein_matrix_determinant ( n );
 
     cout << "  " << setw(4) << n
@@ -222,15 +126,12 @@ void bernstein_matrix_inverse_test(){
  for(n = 5; n <= 15; n++){
     
     a = bernstein_matrix(n);
-    
     a_norm_frobenius = r8mat_norm_fro(n, n, a);
 
     b = bernstein_matrix_inverse(n);
-    
     b_norm_frobenius = r8mat_norm_fro(n, n, b);
 
     c = r8mat_mm_new(n, n, n, a, b);
-
     error_norm_frobenius = r8mat_is_identity(n, c);
 
     cout << "  " << setw(4) << n
@@ -266,7 +167,6 @@ void bernstein_poly_01_test(){
   n_data = 0;
 
   while(true){
-    
     bernstein_poly_01_values(n_data, n, k, x, b);
 
     if (n_data == 0){
@@ -284,45 +184,6 @@ void bernstein_poly_01_test(){
     delete [] bvec;
   }
 
-  return;
-}
-
-void bernstein_poly_01_test2(){
-// Propósito: 
-// 	BERNSTEIN_POLY_01_TEST2 prueba BERNSTEIN_POLY_01.
-// Discusión:
-// 	 Aquí probamos la propiedad Partition-of-Unity.
- 
-  double *bvec;
-  int n;
-  int n_data;
-  int seed;
-  double x;
-
-   cout << "\n";
-   cout << "BERNSTEIN_POLY_01_TEST2:\n";
-   cout << " BERNSTEIN_POLY_01 evalúa los polinomios de Bernstein\n";
-   cout << " basado en el intervalo [0,1].\n";
-   cout << "\n";
-   cout << " Aquí probamos la partición de la propiedad: \n";
-   cout << "\n";
-   cout << " N X Suma (0 <= K <= N) BP01(N,K)(X)\n";
-   cout << "\n";
-
-  seed = 123456789;
-
-  for(n = 0; n <= 10; n++){
-    
-    x = r8_uniform_01 ( seed );
-
-    bvec = bernstein_poly_01 ( n, x );
-
-    cout << "  " << setw(4) << n
-         << "  " << setw(7) << x
-         << "  " << setw(14) << r8vec_sum ( n + 1, bvec ) << "\n";
-
-    delete [] bvec;
-  }
   return;
 }
 
@@ -500,13 +361,10 @@ void bernstein_poly_ab_approx_test(){
     xdata = new double[ndata+1];
     ydata = new double[ndata+1];
     
-    for(i = 0; i <= ndata; i++){
-      
+    for(i = 0; i <= ndata; i++){ 
       if(ndata == 0){
-        
           xdata[i] = 0.5*(a+b);
       }else{
-        
            xdata[i] = ((double)(ndata - i)*a + 
 			(double)(i)*b)/(double)(ndata);
       }
@@ -515,11 +373,9 @@ void bernstein_poly_ab_approx_test(){
     }
     
     xval = r8vec_linspace_new(nval, a, b);
-
     error_max = 0.0;
-
+	  
     yval = bernstein_poly_ab_approx(ndata, a, b, ydata, nval, xval);
-
     error_max = 0.0;
     
     for(i = 0; i < nval; i++){
@@ -535,94 +391,5 @@ void bernstein_poly_ab_approx_test(){
     delete [] ydata;
     delete [] yval;
   }
-  return;
-}
-
-void bernstein_to_legendre_test(){
-//  Propósito:  
-//  	BERNSTEIN_TO_LEGENDRE_TEST prueba BERNSTEIN_TO_LEGENDRE
-
-  double *a;
-  double *b;
-  double *c;
-  double e;
-  int n = 5;
-  
-  cout << "\n";
-  cout << "BERNSTEIN_TO_LEGENDRE_TEST:\n";
-  cout << " BERNSTEIN_TO_LEGENDRE devuelve la matriz A que mapea\n";
-  cout << " coeficientes polinómicos de Bernstein a la forma de Legendre.\n";
-
-  a = bernstein_to_legendre(n);
-  r8mat_print(n + 1, n + 1, a, "  A = bernstein_to_legendre(5):" );
-
-  b = legendre_to_bernstein(n);
-  r8mat_print(n + 1, n + 1, b, "  B = legendre_to_bernstein(5):" );
-
-  c = r8mat_mm_new(n + 1, n + 1, n + 1, a, b);
-  e = r8mat_is_identity(n + 1, c);
-
-  cout << "\n";
-  cout << "  ||A*B-I|| = " << e << "\n";
-
-  delete [] a;
-  delete [] b;
-  delete [] c;
-
-  return;
-}
-
-void bernstein_to_power_test(){
-//  Propósito:
-//  	 BERNSTEIN_TO_POWER_TEST prueba BERNSTEIN_TO_POWER.
-  
-  double *a;
-  double *b;
-  double *c;
-  double e;
-  int n = 5;
-
-  cout << "\n";
-  cout << "BERNSTEIN_TO_POWER_TEST:\n";
-  cout << " BERNSTEIN_TO_POWER devuelve la matriz A que mapea\n";
-  cout << " coeficientes polinómicos de Bernstein a la forma de Power.\n";
-
-  a = bernstein_to_power(n);
-  r8mat_print(n + 1, n + 1, a, "  A = bernstein_to_power(5):");
-
-  b = power_to_bernstein(n);
-  r8mat_print(n + 1, n + 1, b, "  B = power_to_bernstein(5):");
-
-  c = r8mat_mm_new(n + 1, n + 1, n + 1, a, b);
-  e = r8mat_is_identity(n + 1, c);
-  
-  cout << "\n";
-  cout << "  ||A*B-I|| = " << e << "\n";
-
-  delete [] a;
-  delete [] b;
-  delete [] c;
-
-  return;
-}
-
-void bernstein_vandermonde_test(){
-//  Propósito:  
-//  	BERNSTEIN_VANDERMONDE_TEST prueba BERNSTEIN_VANDERMOND
-
-  double *a;
-  int n;
-
-cout << "\n";
-   cout << "BERNSTEIN_VANDERMONDE_TEST\n";
-   cout << " BERNSTEIN_VANDERMONDE devuelve una matriz NxN cuya entrada (I,J)\n";
-   cout << " es el valor del J-ésimo polinomio de Bernstein de grado N-1\n";
-   cout << " evaluado en el i-ésimo punto igualmente espaciado en [0,1].\n";
-  n = 8;
-  a = bernstein_vandermonde(n);
-  r8mat_print(n, n, a, "------> Bernstein Vandermonde(8): ");
-
-  delete [] a;
-
   return;
 }
