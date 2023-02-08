@@ -248,21 +248,17 @@ void bernstein_poly_ab_test(){
   cout << "\n";
   cout << "BERNSTEIN_POLY_AB_TEST\n";
   cout << " BERNSTEIN_POLY_AB evalúa los polinomios de Bernstein sobre un\n";
-  cout << " intervalo arbitrario [A,B].\n";
+  cout << " intervalo arbitrario [0, 1].\n";
   cout << "\n";
-  cout << " Aquí, demostramos que \n";
-  cout << " BPAB(N,K,A1,B1)(X1) = BPAB(N,K,A2,B2)(X2)\n";
-  cout << "siempre que solo eso\n";
-  cout << " (X1-A1)/(B1-A1) = (X2-A2)/(B2-A2).\n";
 
-  x = 0.3;
+  x = 0.5;
   a = 0.0;
   b = 1.0;
 
   bern = bernstein_poly_ab(n, a, b, x);
  
   cout << "\n";
-  cout << "     N     K     A        B        X       BPAB(N,K,A,B)(X)\n";
+  cout << "     N     K     A        B        X       BPAB(N,K)(X)\n";
   cout << "\n";
 
   for(k = 0; k <= n; k++){
@@ -277,49 +273,6 @@ void bernstein_poly_ab_test(){
 
   delete [] bern;
  
-  x = 1.3;
-  a = 1.0;
-  b = 2.0;
-  bern = bernstein_poly_ab(n, a, b, x);
- 
-  cout << "\n";
-  cout << "     N     K     A        B        X       BPAB(N,K,A,B)(X)\n";
-  cout << "\n"; 
-
-  for(k = 0; k <= n; k++){
-    
-     cout << "  " << setw(4) << n
-         << "  " << setw(4) << k
-         << "  " << setw(7) << a
-         << "  " << setw(7) << b
-         << "  " << setw(7) << x
-         << "  " << setw(14) << bern[k] << "\n";
-  }
-
-  delete [] bern;
-
-  x = 2.6;
-  a = 2.0;
-  b = 4.0;
-  
-  bern = bernstein_poly_ab(n, a, b, x);
- 
-  cout << "\n";
-  cout << "     N     K     A        B        X       BPAB(N,K,A,B)(X)\n";
-  cout << "\n";
- 
-  for (k = 0; k <= n; k++){
-    
-      cout << "  " << setw(4) << n
-         << "  " << setw(4) << k
-         << "  " << setw(7) << a
-         << "  " << setw(7) << b
-         << "  " << setw(7) << x
-         << "  " << setw(14) << bern[k] << "\n";
-  }
-
-  delete [] bern;
-
   return;
 }
 
@@ -331,7 +284,7 @@ void bernstein_poly_ab_approx_test(){
   double b;
   double error_max;
   int i;
-  int maxdata = 20;
+  int maxdata = 50;
   int ndata;
   int nsample;
   int nval = 501;
@@ -343,13 +296,13 @@ void bernstein_poly_ab_approx_test(){
   cout << "\n";
   cout << "BERNSTEIN_POLY_AB_APPROX_TEST\n";
   cout << "BERNSTEIN_POLY_AB_APPROX evalúa el polinomio de Bernstein\n";
-  cout << " aproximado a una funcion F(X).\n";
+  cout << " aproximado a una funcion F(x) = sen(x).\n";
   
-  a = 1.0;
-  b = 3.0;
+  a = 0.0;
+  b = 1.0;
 
   cout << "\n";
-  cout << "     N      Max Error\n";
+  cout << "     N    Max Error\n";
   cout << "\n";
 
   for(ndata = 0; ndata <= maxdata; ndata++){
@@ -374,14 +327,13 @@ void bernstein_poly_ab_approx_test(){
     error_max = 0.0;
     
     for(i = 0; i < nval; i++){
-      error_max = r8_max ( error_max, fabs ( yval[i] - sin ( xval[i] ) ) );
+      	error_max = r8_max(error_max, fabs(yval[i] - sin(xval[i])));
     
     }
-    
-    cout << "  " << setw(4) << ndata
+   	cout << "  " << setw(4) << ndata
          << "  " << setw(14) << error_max << "\n";
-
-    delete [] xdata;
+    
+	delete [] xdata;
     delete [] xval;
     delete [] ydata;
     delete [] yval;
