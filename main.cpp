@@ -11,17 +11,12 @@ using namespace std;
 
 int main();
 void bernstein_matrix_test();
-void bernstein_matrix_test2();
 void bernstein_matrix_determinant_test();
 void bernstein_matrix_inverse_test();
 void bernstein_poly_01_test();
-void bernstein_poly_01_test2();
 void bernstein_poly_01_matrix_test();
 void bernstein_poly_ab_test();
 void bernstein_poly_ab_approx_test();
-void bernstein_to_legendre_test();
-void bernstein_to_power_test();
-void bernstein_vandermonde_test();
 
 string var;
 
