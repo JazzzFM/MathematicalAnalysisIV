@@ -603,30 +603,12 @@ double *bernstein_poly_ab_approx(int n, double a, double b, double ydata[], int 
 }
 
 int i4_max(int i1, int i2){
+// Parámetros:
 //
-//  Purpose:
+// Entrada, int I1, I2, son dos enteros a comparar.
 //
-//    I4_MAX returns the maximum of two I4's.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    13 October 1998
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int I1, I2, are two integers to be compared.
-//
-//    Output, int I4_MAX, the larger of I1 and I2.
-//
-  
+// Salida, int I4_MAX, el mayor de I1 e I2.
+
   int value;
 
   if(i2 < i1){
@@ -642,29 +624,12 @@ int i4_max(int i1, int i2){
 }
 
 int i4_min(int i1, int i2){
+//  Objetivo:
+//	I4_MIN devuelve el mínimo de dos I4.
 //
-//  Purpose:
-//
-//    I4_MIN returns the minimum of two I4's.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    13 October 1998
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int I1, I2, two integers to be compared.
-//
-//    Output, int I4_MIN, the smaller of I1 and I2.
-//
+// Parámetros:
+//	 Entrada, int I1, I2, dos enteros a comparar.
+//	 Salida, int I4_MIN, el menor de I1 e I2.
 
   int value;
 
@@ -681,47 +646,24 @@ int i4_min(int i1, int i2){
 
 
 double r8_choose(int n, int k){
+//  Objetivo:
+//	 R8_CHOOSE calcula el coeficiente binomial C(N,K) como un R8.
 //
-//  Purpose:
+//  Discusión:
 //
-//    R8_CHOOSE computes the binomial coefficient C(N,K) as an R8.
+// 	El valor se calcula de forma que se evite el desbordamiento y
+//    	redondear. El cálculo se realiza en aritmética R8.
 //
-//  Discussion:
+// 	La fórmula utilizada es:
 //
-//    The value is calculated in such a way as to avoid overflow and
-//    roundoff.  The calculation is done in R8 arithmetic.
+// 	C(N,K) = N! / ( K! * (N-K)! )
+// Parámetros:
 //
-//    The formula used is:
+// Ingrese, int N, K, los valores de N y K.
 //
-//      C(N,K) = N! / ( K! * (N-K)! )
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    29 July 2011
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Reference:
-//
-//    ML Wolfson, HV Wright,
-//    Algorithm 160:
-//    Combinatorial of M Things Taken N at a Time,
-//    Communications of the ACM,
-//    Volume 6, Number 4, April 1963, page 161.
-//
-//  Parameters:
-//
-//    Input, int N, K, the values of N and K.
-//
-//    Output, double R8_CHOOSE, the number of combinations of N
-//    things taken K at a time.
-//
+// Salida:
+// 	 -double R8_CHOOSE, el número de combinaciones de N
+// 		cosas tomadas K a la vez.
   int i;
   int mn;
   int mx;
@@ -750,29 +692,14 @@ double r8_choose(int n, int k){
 }
 
 double r8_max(double x, double y){
+//  Objetivo:
 //
-//  Purpose:
+// R8_MAX devuelve el máximo de dos R8.
+// Parámetros:
+//	- Entrada, doble X, Y, las cantidades a comparar.
 //
-//    R8_MAX returns the maximum of two R8's.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    18 August 2004
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, double X, Y, the quantities to compare.
-//
-//    Output, double R8_MAX, the maximum of X and Y.
-//
+// Salida:
+// double R8_MAX, el máximo de X e Y.
 
   double value;
 
@@ -789,33 +716,14 @@ double r8_max(double x, double y){
 }
 
 double r8_mop(int i){
+//  Objetivo:
+//	- R8_MOP devuelve la potencia I-ésima de -1 como un valor R8.
 //
-//  Purpose:
-//
-//    R8_MOP returns the I-th power of -1 as an R8 value.
-//
-//  Discussion:
-//
-//    An R8 is an double value.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    16 November 2007
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int I, the power of -1.
-//
-//    Output, double R8_MOP, the I-th power of -1.
-//
+//  Discusión:
+//	- Un R8 es un valor doble.
+// Parámetros:
+// 	Entrada, int I, la potencia de -1.
+// 	Salida, doble R8_MOP, la i-ésima potencia de -1.
   
   double value;
 
@@ -832,79 +740,35 @@ double r8_mop(int i){
 }
 
 double r8_uniform_01(int &seed){
+// Objetivo:
 //
-//  Purpose:
+// R8_UNIFORM_01 devuelve una unidad pseudoaleatoria R8.
 //
-//    R8_UNIFORM_01 returns a unit pseudorandom R8.
+//  Discusión:
 //
-//  Discussion:
+// Esta rutina implementa la recursividad
 //
-//    This routine implements the recursion
+// semilla = ( 16807 * semilla ) mod ( 2^31 - 1 )
+// u = semilla / ( 2^31 - 1 )
 //
-//      seed = ( 16807 * seed ) mod ( 2^31 - 1 )
-//      u = seed / ( 2^31 - 1 )
+// La aritmética de enteros nunca requiere más de 32 bits,
+// incluyendo un bit de signo.
 //
-//    The integer arithmetic never requires more than 32 bits,
-//    including a sign bit.
+// Si la semilla inicial es 12345, entonces los tres primeros cálculos son
+// Entrada Salida R8_UNIFORM_01
+// sed sed
 //
-//    If the initial seed is 12345, then the first three computations are
+// 12345 207482415 0,096616
+// 207482415 1790989824 0,833995
+// 1790989824 2035175616 0.947702
 //
-//      Input     Output      R8_UNIFORM_01
-//      SEED      SEED
+// Parámetros:
 //
-//         12345   207482415  0.096616
-//     207482415  1790989824  0.833995
-//    1790989824  2035175616  0.947702
+// Entrada/salida, int &SEED, el valor "sed". Normalmente, esto
+// el valor no debe ser 0. En la salida, SEED se ha actualizado.
 //
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license. 
-//
-//  Modified:
-//
-//    09 April 2012
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Reference:
-//
-//    Paul Bratley, Bennett Fox, Linus Schrage,
-//    A Guide to Simulation,
-//    Second Edition,
-//    Springer, 1987,
-//    ISBN: 0387964673,
-//    LC: QA76.9.C65.B73.
-//
-//    Bennett Fox,
-//    Algorithm 647:
-//    Implementation and Relative Efficiency of Quasirandom
-//    Sequence Generators,
-//    ACM Transactions on Mathematical Software,
-//    Volume 12, Number 4, December 1986, pages 362-376.
-//
-//    Pierre L'Ecuyer,
-//    Random Number Generation,
-//    in Handbook of Simulation,
-//    edited by Jerry Banks,
-//    Wiley, 1998,
-//    ISBN: 0471134031,
-//    LC: T57.62.H37.
-//
-//    Peter Lewis, Allen Goodman, James Miller,
-//    A Pseudo-Random Number Generator for the System/360,
-//    IBM Systems Journal,
-//    Volume 8, Number 2, 1969, pages 136-143.
-//
-//  Parameters:
-//
-//    Input/output, int &SEED, the "seed" value.  Normally, this
-//    value should not be 0.  On output, SEED has been updated.
-//
-//    Output, double R8_UNIFORM_01, a new pseudorandom variate, 
-//    strictly between 0 and 1.
-//
+// Salida, doble R8_UNIFORM_01, una nueva variable pseudoaleatoria,
+// estrictamente entre 0 y 1.
 
   const int i4_huge = 2147483647;
   int k;
@@ -932,39 +796,20 @@ double r8_uniform_01(int &seed){
 }
 
 double r8mat_is_identity(int n, double a[]){
+//  Objetivo:
+//	R8MAT_IS_IDENTITY determina si un R8MAT es la identidad.
 //
-//  Purpose:
+//  Discusión:
+//	Un R8MAT es una matriz de valores reales (tipo = 8).
+//	La rutina devuelve la norma de Frobenius de A - I.
 //
-//    R8MAT_IS_IDENTITY determines if an R8MAT is the identity.
+// Parámetros:
+//	Entrada, int N, el orden de la matriz.
+//	Entrada, doble A[N*N], la matriz.
 //
-//  Discussion:
-//
-//    An R8MAT is a matrix of real ( kind = 8 ) values.
-//
-//    The routine returns the Frobenius norm of A - I.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    29 July 2011
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N, the order of the matrix.
-//
-//    Input, double A[N*N], the matrix.
-//
-//    Output, double R8MAT_IS_IDENTITY, the Frobenius norm
-//    of the difference matrix A - I, which would be exactly zero
-//    if A were the identity matrix.
-//
+//	Salida, doble R8MAT_IS_IDENTITY, la norma Frobenius
+// 	de la matriz de diferencias A - I, que sería exactamente cero
+// 	si A fuera la matriz identidad.
 
   double error_frobenius;
   int i;
@@ -995,38 +840,20 @@ double r8mat_is_identity(int n, double a[]){
 }
 
 double *r8mat_mm_new(int n1, int n2, int n3, double a[], double b[]){
+//  Objetivo:
+//	R8MAT_MM_NEW multiplica dos matrices.
 //
-//  Purpose:
+//  Discusión:
+//	Un R8MAT es una matriz doblemente dimensionada de valores R8, almacenada como un vector
+//	en orden de columnas principales.
 //
-//    R8MAT_MM_NEW multiplies two matrices.
+// 	Para esta rutina, el resultado se devuelve como el valor de la función.
 //
-//  Discussion:
-//
-//    An R8MAT is a doubly dimensioned array of R8 values, stored as a vector
-//    in column-major order.
-//
-//    For this routine, the result is returned as the function value.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    18 October 2005
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N1, N2, N3, the order of the matrices.
-//
-//    Input, double A[N1*N2], double B[N2*N3], the matrices to multiply.
-//
-//    Output, double R8MAT_MM[N1*N3], the product matrix C = A * B.
-//
+// Parámetros:
+//	Entrada, int N1, N2, N3, el orden de las matrices.
+//	Entrada, double A[N1*N2], double B[N2*N3], las matrices a multiplicar.
+//	Salida, doble R8MAT_MM[N1*N3], la matriz del producto C = A * B.
+
 
   double *c;
   int i;
@@ -1051,40 +878,20 @@ double *r8mat_mm_new(int n1, int n2, int n3, double a[], double b[]){
 }
 
 double *r8mat_mv_new(int m, int n, double a[], double x[]){
+//  Objetivo:
+//	R8MAT_MV_NEW multiplica una matriz por un vector.
 //
-//  Purpose:
+//  Discusión:
+//	Un R8MAT es una matriz doblemente dimensionada de valores R8, almacenada como un vector
+// 	en orden de columnas principales.
 //
-//    R8MAT_MV_NEW multiplies a matrix times a vector.
+//	Para esta rutina, el resultado se devuelve como el valor de la función.
 //
-//  Discussion:
-//
-//    An R8MAT is a doubly dimensioned array of R8 values, stored as a vector
-//    in column-major order.
-//
-//    For this routine, the result is returned as the function value.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    11 April 2007
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int M, N, the number of rows and columns of the matrix.
-//
-//    Input, double A[M,N], the M by N matrix.
-//
-//    Input, double X[N], the vector to be multiplied by A.
-//
-//    Output, double R8MAT_MV_NEW[M], the product A*X.
-//
+// Parámetros:
+//	Ingrese, int M, N, el número de filas y columnas de la matriz.
+//	Entrada, doble A[M,N], la matriz M por N.
+//	Entrada, doble X[N], el vector a multiplicar por A.
+//	Salida, doble R8MAT_MV_NEW[M], el producto A*X.
 
   int i;
   int j;
@@ -1106,48 +913,26 @@ double *r8mat_mv_new(int m, int n, double a[], double x[]){
 }
 
 double r8mat_norm_fro(int m, int n, double a[]){
+//  Objetivo:
+//	R8MAT_NORM_FRO devuelve la norma Frobenius de un R8MAT.
 //
-//  Purpose:
+//  Discusión:
+//	Un R8MAT es una matriz doblemente dimensionada de valores R8, almacenada como un vector
+// 	en orden de columnas principales.
 //
-//    R8MAT_NORM_FRO returns the Frobenius norm of an R8MAT.
+// La norma de Frobenius se define como
 //
-//  Discussion:
+// R8MAT_NORM_FRO = raíz cuadrada(suma(1 <= I <= M ) * suma (1 <= j <= N) A(I,J)**2 )
+// La norma matricial de Frobenius no se deriva de una norma vectorial, sino
+// es compatible con la norma del vector L2, por lo que:
 //
-//    An R8MAT is a doubly dimensioned array of R8 values, stored as a vector
-//    in column-major order.
+// r8vec_norm_l2 ( A * x ) <= r8mat_norm_fro ( A ) * r8vec_norm_l2 ( x ).
 //
-//    The Frobenius norm is defined as
-//
-//      R8MAT_NORM_FRO = sqrt (
-//        sum ( 1 <= I <= M ) sum ( 1 <= j <= N ) A(I,J)**2 )
-//    The matrix Frobenius norm is not derived from a vector norm, but
-//    is compatible with the vector L2 norm, so that:
-//
-//      r8vec_norm_l2 ( A * x ) <= r8mat_norm_fro ( A ) * r8vec_norm_l2 ( x ).
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    10 October 2005
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int M, the number of rows in A.
-//
-//    Input, int N, the number of columns in A.
-//
-//    Input, double A[M*N], the matrix whose Frobenius
-//    norm is desired.
-//
-//    Output, double R8MAT_NORM_FRO, the Frobenius norm of A.
-//
+// Parámetros:
+//	- Ingrese, int M, el número de filas en A.
+//	- Ingrese, int N, el número de columnas en A.
+//	- Entrada, doble A[M*N], la matriz cuyo Frobenius se desea la norma.
+//	- Salida, doble R8MAT_NORM_FRO, la norma Frobenius de A.
 
   int i;
   int j;
@@ -1167,40 +952,19 @@ double r8mat_norm_fro(int m, int n, double a[]){
 }
 
 void r8mat_print(int m, int n, double a[], string title){
+//  Objetivo:
+//	- R8MAT_PRINT imprime un R8MAT.
 //
-//  Purpose:
+//  Discusión:
+// 	- Un R8MAT es una matriz doblemente dimensionada de valores R8, almacenada como un vector
+// 	en orden de columnas principales.
 //
-//    R8MAT_PRINT prints an R8MAT.
-//
-//  Discussion:
-//
-//    An R8MAT is a doubly dimensioned array of R8 values, stored as a vector
-//    in column-major order.
-//
-//    Entry A(I,J) is stored as A[I+J*M]
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    10 September 2009
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int M, the number of rows in A.
-//
-//    Input, int N, the number of columns in A.
-//
-//    Input, double A[M*N], the M by N matrix.
-//
-//    Input, string TITLE, a title.
-//
+//	 La entrada A(I,J) se almacena como A[I+J*M]
+// Parámetros:
+// 	- Ingrese, int M, el número de filas en A.
+// 	- Ingrese, int N, el número de columnas en A.
+//	- Entrada, doble A[M*N], la matriz M por N.
+//	- Entrada, cadena TITLE, un título.
   
     r8mat_print_some(m, n, a, 1, 1, m, n, title);
 
@@ -1208,43 +972,19 @@ void r8mat_print(int m, int n, double a[], string title){
 }
 
 void r8mat_print_some(int m, int n, double a[], int ilo, int jlo, int ihi, int jhi, string title){
+//  Objetivo:
+//	- R8MAT_PRINT_SOME imprime algo de un R8MAT.
 //
-//  Purpose:
+//  Discusión:
+//	- Un R8MAT es una matriz doblemente dimensionada de valores R8, almacenada como un vector en orden de columnas principales.
 //
-//    R8MAT_PRINT_SOME prints some of an R8MAT.
-//
-//  Discussion:
-//
-//    An R8MAT is a doubly dimensioned array of R8 values, stored as a vector
-//    in column-major order.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    20 August 2010
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int M, the number of rows of the matrix.
-//    M must be positive.
-//
-//    Input, int N, the number of columns of the matrix.
-//    N must be positive.
-//
-//    Input, double A[M*N], the matrix.
-//
-//    Input, int ILO, JLO, IHI, JHI, designate the first row and
-//    column, and the last row and column to be printed.
-//
-//    Input, string TITLE, a title.
-//
+// Parámetros:
+//	- Ingrese, int M, el número de filas de la matriz. M debe ser positivo.
+// 	- Entrada, int N, el número de columnas de la matriz. N debe ser positivo.
+// 	- Entrada, doble A[M*N], la matriz.
+//	- Ingrese, int ILO, JLO, IHI, JHI, designe la primera fila y columna, y la última fila y columna a imprimir.
+//	- Entrada, cadena TITLE, un título.
+
 
 # define INCX 5
 
@@ -1265,7 +1005,6 @@ void r8mat_print_some(int m, int n, double a[], int ilo, int jlo, int ihi, int j
     return;
   }
 
-    //  Print the columns of the matrix, in strips of 5.
 
   for(j2lo = jlo; j2lo <= jhi; j2lo = j2lo + INCX){
     
@@ -1274,8 +1013,8 @@ void r8mat_print_some(int m, int n, double a[], int ilo, int jlo, int ihi, int j
     j2hi = i4_min(j2hi, jhi);
 
     cout << "\n";
-   //  For each column J in the current range...
-   //  Write the header.
+	// Para cada columna J en el rango actual...
+    	// Escribe el encabezado.
 
     cout << "  Col:    ";
     for(j = j2lo; j <= j2hi; j++){
@@ -1287,15 +1026,11 @@ void r8mat_print_some(int m, int n, double a[], int ilo, int jlo, int ihi, int j
     cout << "  Row\n";
     cout << "\n";
     
-    //  Determine the range of the rows in this strip.
 
     i2lo = i4_max(ilo, 1);
     i2hi = i4_min(ihi, m);
 
     for(i = i2lo; i <= i2hi; i++){
-
-    //  Print out (up to) 5 entries in row I, that lie in the current strip.
-
       cout << setw(5) << i - 1 << ": ";
 
       for(j = j2lo; j <= j2hi; j++){
@@ -1310,34 +1045,14 @@ void r8mat_print_some(int m, int n, double a[], int ilo, int jlo, int ihi, int j
 }
 
 double *r8mat_zeros_new(int m, int n){
-//
-//  Purpose:
-//
-//    R8MAT_ZEROS_NEW returns a new zeroed R8MAT.
-//
-//  Discussion:
-//
-//    An R8MAT is a doubly dimensioned array of R8 values, stored as a vector
-//    in column-major order.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    03 October 2005
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int M, N, the number of rows and columns.
-//
-//    Output, double R8MAT_ZEROS_NEW[M*N], the new zeroed matrix.
-//
+//  Objetivo:
+// 	R8MAT_ZEROS_NEW devuelve un nuevo R8MAT puesto a cero.
+//  Discusión:
+//	Un R8MAT es una matriz doblemente dimensionada de valores R8, almacenada como un vector
+// 	en orden de columnas principales.
+// Parámetros:
+//	- Ingrese, int M, N, el número de filas y columnas.
+//	- Salida, doble R8MAT_ZEROS_NEW[M*N], la nueva matriz puesta a cero.
 
   double *a;
   int i;
@@ -1355,35 +1070,14 @@ double *r8mat_zeros_new(int m, int n){
 }
 
 double r8vec_dot_product(int n, double a1[], double a2[]){
-//
-//  Purpose:
-//
-//    R8VEC_DOT_PRODUCT computes the dot product of a pair of R8VEC's.
-//
-//  Discussion:
-//
-//    An R8VEC is a vector of R8's.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    03 July 2005
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N, the number of entries in the vectors.
-//
-//    Input, double A1[N], A2[N], the two vectors to be considered.
-//
-//    Output, double R8VEC_DOT_PRODUCT, the dot product of the vectors.
-//
+//  Objetivo:
+//	R8VEC_DOT_PRODUCT calcula el producto escalar de un par de R8VEC.
+//  Discusión:
+// 	Un R8VEC es un vector de R8.
+// Parámetros:
+//	Ingrese, int N, el número de entradas en los vectores.
+//	Entrada, doble A1[N], A2[N], los dos vectores a considerar.
+//	Salida, doble R8VEC_DOT_PRODUCT, el producto escalar de los vectores.
 
   int i;
   double value;
@@ -1398,35 +1092,14 @@ double r8vec_dot_product(int n, double a1[], double a2[]){
 }
 
 double *r8vec_linspace_new(int n, double a_first, double a_last){
-//
-//  Purpose:
-//
-//    R8VEC_LINSPACE_NEW creates a vector of linearly spaced values.
-//
-//  Discussion:
-//
-//    An R8VEC is a vector of R8's.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    29 March 2011
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N, the number of entries in the vector.
-//
-//    Input, double A_FIRST, A_LAST, the first and last entries.
-//
-//    Output, double R8VEC_LINSPACE_NEW[N], a vector of linearly spaced data.
-//
+//  Objetivo:
+//	 R8VEC_LINSPACE_NEW crea un vector de valores espaciados linealmente.
+//  Discusión:
+//	Un R8VEC es un vector de R8.
+// Parámetros:
+//	Entrada, int N, el número de entradas en el vector.
+// 	Entrada, doble A_FIRST, A_LAST, la primera y la última entrada.
+// 	Salida, doble R8VEC_LINSPACE_NEW[N], un vector de datos espaciados linealmente.
 
   double *a;
   int i;
@@ -1447,35 +1120,14 @@ double *r8vec_linspace_new(int n, double a_first, double a_last){
 }
 
 double r8vec_sum(int n, double a[]){
-//
-//  Purpose:
-//
-//    R8VEC_SUM returns the sum of an R8VEC.
-//
-//  Discussion:
-//
-//    An R8VEC is a vector of R8's.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    15 October 2004
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N, the number of entries in the vector.
-//
-//    Input, double A[N], the vector.
-//
-//    Output, double R8VEC_SUM, the sum of the vector.
-//
+//  Objetivo:
+// 	R8VEC_SUM devuelve la suma de un R8VEC.
+//  Discusión:
+// 	Un R8VEC es un vector de R8.
+// Parámetros:
+//	Entrada, int N, el número de entradas en el vector.
+//	Entrada, doble A[N], el vector.
+// 	Salida, doble R8VEC_SUM, la suma del vector.
 
   int i;
   double value;
@@ -1491,31 +1143,13 @@ double r8vec_sum(int n, double a[]){
 }
 
 void timestamp(){
-//
-//  Purpose:
-//
-//    TIMESTAMP prints the current YMDHMS date as a time stamp.
-//
-//  Example:
-//
-//    31 May 2001 09:45:54 AM
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    08 July 2009
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    None
-//
+//  Objetivo:
+//	TIMESTAMP imprime la fecha YMDHMS actual como una marca de tiempo.
+//  Ejemplo:
+// 	31 de mayo de 2001 09:45:54 a. m.
+// Parámetros:
+//	Ninguno
+
 # define TIME_SIZE 40
 
   static char time_buffer[TIME_SIZE];
