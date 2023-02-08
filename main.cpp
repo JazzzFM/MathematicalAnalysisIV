@@ -30,9 +30,8 @@ int main ( ){
   	// bernstein_matrix_test();
   	// bernstein_matrix_determinant_test();
   	// bernstein_matrix_inverse_test();
-  	// bernstein_poly_01_test();
-     	// bernstein_poly_01_matrix_test();
-	
+  	//bernstein_poly_01_test();
+     	 bernstein_poly_01_matrix_test();
 	bernstein_poly_ab_test(); 
   	bernstein_poly_ab_approx_test();
 	

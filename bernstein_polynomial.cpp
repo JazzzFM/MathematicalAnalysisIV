@@ -1016,14 +1016,14 @@ void r8mat_print_some(int m, int n, double a[], int ilo, int jlo, int ihi, int j
 	// Para cada columna J en el rango actual...
     	// Escribe el encabezado.
 
-    cout << "  Col:    ";
+    cout << "  Columna:    ";
     for(j = j2lo; j <= j2hi; j++){
 
       cout << setw(7) << j - 1 << "       ";
     }
 
     cout << "\n";
-    cout << "  Row\n";
+    cout << "  Fila \n";
     cout << "\n";
     
 
