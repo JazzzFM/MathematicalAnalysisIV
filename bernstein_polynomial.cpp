@@ -11,52 +11,39 @@ using namespace std;
 
 
 double *bernstein_matrix(int n){
+//  Objetivo:
 //
-//  Purpose:
+// BERNSTEIN_MATRIX devuelve la matriz de Bernstein.
 //
-//    BERNSTEIN_MATRIX returns the Bernstein matrix.
+//  Discusión:
 //
-//  Discussion:
+// La matriz de Bernstein de orden N es una matriz A de NxN que se puede utilizar para
+// transformar un vector de coeficientes de base de potencia C que representan un polinomio
+// P(X) a un vector de coeficiente de base de Bernstein correspondiente B:
 //
-//    The Bernstein matrix of order N is an NxN matrix A which can be used to
-//    transform a vector of power basis coefficients C representing a polynomial 
-//    P(X) to a corresponding Bernstein basis coefficient vector B:
+// B = A * C
 //
-//      B = A * C
+// Los N vectores de base de potencia se ordenan como (1,X,X^2,...X^(N-1)) y los N
+// Vectores de base de Bernstein como ((1-X)^(N-1), X*(1_X)^(N-2),...,X^(N-1)).
 //
-//    The N power basis vectors are ordered as (1,X,X^2,...X^(N-1)) and the N 
-//    Bernstein basis vectors as ((1-X)^(N-1), X*(1_X)^(N-2),...,X^(N-1)).
+// Para N = 5, la matriz tiene la forma:
 //
-//    For N = 5, the matrix has the form:
+// 1 -4   6  -4  1
+// 0  4 -12  12 -4
+// 0  0   6 -12  6
+// 0  0   0   4 -4
+// 0  0   0   0  1
 //
-//      1 -4   6  -4  1
-//      0  4 -12  12 -4
-//      0  0   6 -12  6
-//      0  0   0   4 -4
-//      0  0   0   0  1
+// y los números en cada columna representan los coeficientes en la potencia
+// desarrollo en serie de un polinomio de Bernstein, de modo que
 //
-//    and the numbers in each column represent the coefficients in the power
-//    series expansion of a Bernstein polynomial, so that 
+// B(5,4) = - 4x^4 + 12x^3 - 12x^2 + 4x
 //
-//      B(5,4) = - 4 x^4 + 12 x^3 - 12 x^2 + 4 x
+// Parámetros:
+//	Entrada, int N, el orden de la matriz.
 //
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    29 July 2011
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N, the order of the matrix.
-//
-//    Output, double BERNSTEIN_MATRIX[N*N], the Bernstein matrix.
+// Salida:
+// 	doble BERNSTEIN_MATRIX[N*N], la matriz de Bernstein.
 //
 
   double *a;
@@ -80,36 +67,20 @@ double *bernstein_matrix(int n){
 }
 
 double bernstein_matrix_determinant(int n){
+//  Objetivo:
+//	BERNSTEIN_MATRIX_DETERMINANT devuelve el determinante de la matriz de BERNSTEIN.
 //
-//  Purpose:
+// Parámetros:
+// 	Entrada, int N, el orden de la matriz.
 //
-//    BERNSTEIN_MATRIX_DETERMINANT returns the determinant of the BERNSTEIN matrix.
-//
-//  Licensing:
-//
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    14 March 2015
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N, the order of the matrix.
-//
-//    Output, double BERNSTEIN_MATRIX_DETERMINANT, the determinant.
-//
+// Salida: 
+// 	doble BERNSTEIN_MATRIX_DETERMINANT, el determinante.
 
   int i;
   double value;
 
   value = 1.0;
   for(i = 0; i < n; i++){
-    
 	value = value*r8_choose(n-1, i);
   }
 
@@ -118,47 +89,35 @@ double bernstein_matrix_determinant(int n){
 
 double *bernstein_matrix_inverse(int n){
 //
-//  Purpose:
+//  Objetivo:
+//  	BERNSTEIN_MATRIX_INVERSE devuelve la matriz de Bernstein inversa.
 //
-//    BERNSTEIN_MATRIX_INVERSE returns the inverse Bernstein matrix.
+//  Discusión:
 //
-//  Discussion:
+// La matriz inversa de Bernstein de orden N es una matriz A NxN que puede
+// ser usado para transformar un vector de coeficientes de base de Bernstein B
+// representando un polinomio P(X) a una base de potencia correspondiente
+// coeficiente vector C:
 //
-//    The inverse Bernstein matrix of order N is an NxN matrix A which can 
-//    be used to transform a vector of Bernstein basis coefficients B
-//    representing a polynomial P(X) to a corresponding power basis 
-//    coefficient vector C:
+// C = A * B
 //
-//      C = A * B
+// Los N vectores de base de potencia se ordenan como (1,X,X^2,...X^(N-1)) y los N
+// Vectores de base de Bernstein como ((1-X)^(N-1), X*(1_X)^(N-2),...,X^(N-1)).
 //
-//    The N power basis vectors are ordered as (1,X,X^2,...X^(N-1)) and the N 
-//    Bernstein basis vectors as ((1-X)^(N-1), X*(1_X)^(N-2),...,X^(N-1)).
+// Para N = 5, la matriz tiene la forma:
 //
-//    For N = 5, the matrix has the form:
+// 1  1   1   1   1
+// 0  1/4 1/2 3/4 1
+// 0  0   1/6 1/2 1
+// 0  0   0   1/4 1
+// 0  0   0   0   1
 //
-//      1   1    1    1   1
-//      0  1/4  1/2  3/4  1
-//      0   0   1/6  1/2  1
-//      0   0    0   1/4  1
-//      0   0    0    0   1
 //
-//  Licensing:
+// Parámetros:
+// 	Entrada, int N, el orden de la matriz.
 //
-//    This code is distributed under the GNU LGPL license.
-//
-//  Modified:
-//
-//    29 July 2011
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N, the order of the matrix.
-//
-//    Output, double BERNSTEIN_MATRIX_INVERSE[N*N], the inverse Bernstein matrix.
+// Salida:
+// 	doble BERNSTEIN_MATRIX_INVERSE[N*N], la matriz inversa de Bernstein.
 //
   
   double *a;
@@ -183,20 +142,16 @@ double *bernstein_matrix_inverse(int n){
 }
 
 double *bernstein_poly_01(int n, double x){
+//  Objetivo:
+//	BERNSTEIN_POLY_01 evalúa los polinomios de Bernstein basados en [0,1].
 //
-//  Purpose:
+//  Discusión:
+// 	 Se supone que los polinomios de Bernstein se basan en [0,1].
 //
-//    BERNSTEIN_POLY_01 evaluates the Bernstein polynomials based in [0,1].
+// La fórmula es:
+// 	B(N,I)(X) = [N!/(I!*(N-I)!)] * (1-X)^(N-I) * X^I
 //
-//  Discussion:
-//
-//    The Bernstein polynomials are assumed to be based on [0,1].
-//
-//    The formula is:
-//
-//      B(N,I)(X) = [N!/(I!*(N-I)!)] * (1-X)^(N-I) * X^I
-//
-//  First values:
+// Primeros valores:
 //
 //    B(0,0)(X) = 1
 //
@@ -218,41 +173,30 @@ double *bernstein_poly_01(int n, double x){
 //    B(4,3)(X) = 4 * (1-X)   * X^3
 //    B(4,4)(X) =               X^4
 //
-//  Special values:
+// Valores especiales:
 //
-//    B(N,I)(X) has a unique maximum value at X = I/N.
+// B(N,I)(X) tiene un valor máximo único en X = I/N.
 //
-//    B(N,I)(X) has an I-fold zero at 0 and and N-I fold zero at 1.
+// B(N,I)(X) tiene un I-fold cero en 0 y N-I fold zero en 1.
 //
-//    B(N,I)(1/2) = C(N,K) / 2^N
+// B(N,I)(1/2) = C(N,K) / 2^N
 //
-//    For a fixed X and N, the polynomials add up to 1:
+// Para X y N fijos, los polinomios suman 1:
 //
-//      Sum ( 0 <= I <= N ) B(N,I)(X) = 1
+// Suma ( 0 <= I <= N ) B(N,I)(X) = 1
 //
-//  Licensing:
+// Parámetros:
 //
-//    This code is distributed under the GNU LGPL license. 
+// Entrada:
+// 	- int N, el grado de los polinomios de Bernstein
+//    	para ser utilizado. Para cualquier N, hay un conjunto de N+1 polinomios de Bernstein,
+// 	cada uno de grado N, que forman una base para polinomios en [0,1].
 //
-//  Modified:
+// 	- doble X, el punto de evaluación.
 //
-//    29 July 2011
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int N, the degree of the Bernstein polynomials 
-//    to be used.  For any N, there is a set of N+1 Bernstein polynomials,
-//    each of degree N, which form a basis for polynomials on [0,1].
-//
-//    Input, double X, the evaluation point.
-//
-//    Output, double BERNSTEIN_POLY[N+1], the values of the N+1 
-//    Bernstein polynomials at X.
-//
+// Salida:
+// 	- double BERNSTEIN_POLY[N+1], los valores de N+1 Polinomios de Bernstein en X.
+
 
   double *bern;
   int i;
@@ -284,20 +228,15 @@ double *bernstein_poly_01(int n, double x){
 }
 
 double *bernstein_poly_01_matrix(int m, int n, double x[]){
+//  Objetivo:
+//	- BERNSTEIN_POLY_01_MATRIX evalúa los polinomios de Bernstein basados en [0,1].
 //
-//  Purpose:
+//  Discusión:
+//	Se supone que los polinomios de Bernstein se basan en [0,1].
+//	La fórmula es:
+//		B(N,I)(X) = [N!/(I!*(N-I)!)] * (1-X)^(N-I) * X^I
 //
-//    BERNSTEIN_POLY_01_MATRIX evaluates the Bernstein polynomials based in [0,1].
-//
-//  Discussion:
-//
-//    The Bernstein polynomials are assumed to be based on [0,1].
-//
-//    The formula is:
-//
-//      B(N,I)(X) = [N!/(I!*(N-I)!)] * (1-X)^(N-I) * X^I
-//
-//  First values:
+//    Primeros valores:
 //
 //    B(0,0)(X) = 1
 //
@@ -319,43 +258,26 @@ double *bernstein_poly_01_matrix(int m, int n, double x[]){
 //    B(4,3)(X) = 4 * (1-X)   * X^3
 //    B(4,4)(X) =               X^4
 //
-//  Special values:
+// Valores especiales:
 //
-//    B(N,I)(X) has a unique maximum value at X = I/N.
+// B(N,I)(X) tiene un valor máximo único en X = I/N.
 //
-//    B(N,I)(X) has an I-fold zero at 0 and and N-I fold zero at 1.
+// B(N,I)(1/2) = C(N,K) / 2^N
 //
-//    B(N,I)(1/2) = C(N,K) / 2^N
+// Para X y N fijos, los polinomios suman 1:
 //
-//    For a fixed X and N, the polynomials add up to 1:
+// Suma( 0 <= I <= N ) B(N,I)(X) = 1
 //
-//      Sum ( 0 <= I <= N ) B(N,I)(X) = 1
+// Parámetros:
 //
-//  Licensing:
+// 	- Entrada: int M, el número de puntos de evaluación.
+//	- Entrada: int N, el grado de los polinomios de Bernstein
+//    		para ser utilizado. Para cualquier N, hay un conjunto de N+1 polinomios de Bernstein,
+// 		cada uno de grado N, que forman una base para polinomios en [0,1].
+// 	- Entrada, doble X[M], los puntos de evaluación.
 //
-//    This code is distributed under the GNU LGPL license. 
-//
-//  Modified:
-//
-//    27 January 2016
-//
-//  Author:
-//
-//    John Burkardt
-//
-//  Parameters:
-//
-//    Input, int M, the number of evaluation points.
-//
-//    Input, int N, the degree of the Bernstein polynomials 
-//    to be used.  For any N, there is a set of N+1 Bernstein polynomials,
-//    each of degree N, which form a basis for polynomials on [0,1].
-//
-//    Input, double X[M], the evaluation points.
-//
-//    Output, double BERNSTEIN_POLY_01_MATRIX[M*(N+1)], the values of the N+1 
-//    Bernstein polynomials at the evaluation points.
-//
+// Salida:
+// 	- doble BERNSTEIN_POLY_01_MATRIX[M*(N+1)], los valores de N+1 Polinomios de Bernstein en los puntos de evaluación.
 
   double *b;
   int i;
@@ -394,24 +316,17 @@ double *bernstein_poly_01_matrix(int m, int n, double x[]){
 
 
 void bernstein_poly_01_values(int &n_data, int &n, int &k, double &x, double &b){
+//  Objetivo:
+//	BERNSTEIN_POLY_01_VALUES devuelve algunos valores de los polinomios de Bernstein.
 //
-//  Purpose:
+//  Discusión:
+//	Se supone que los polinomios de Bernstein se basan en [0,1].
+//	La fórmula para los polinomios de Bernstein es
+//		B(N,I)(X) = [N!/(I!(N-I)!)] * (1-X)^(N-I) * X^I
 //
-//    BERNSTEIN_POLY_01_VALUES returns some values of the Bernstein polynomials.
+// En Mathematica, la función puede ser evaluada por: Binomial[n,i] * (1-x)^(n-i) * x^i
 //
-//  Discussion:
-//
-//    The Bernstein polynomials are assumed to be based on [0,1].
-//
-//    The formula for the Bernstein polynomials is
-//
-//      B(N,I)(X) = [N!/(I!(N-I)!)] * (1-X)^(N-I) * X^I
-//
-//    In Mathematica, the function can be evaluated by:
-//
-//      Binomial[n,i] * (1-x)^(n-i) * x^i
-//
-//  First values:
+// Primeros valores:
 //
 //    B(0,0)(X) = 1
 //
@@ -432,54 +347,33 @@ void bernstein_poly_01_values(int &n_data, int &n, int &k, double &x, double &b)
 //    B(4,2)(X) = 6 * (1-X)^2  * X^2
 //    B(4,3)(X) = 4 * (1-X)    * X^3
 //    B(4,4)(X) =                X^4
+// 
+// Valores especiales:
 //
-//  Special values:
+// B(N,I)(X) tiene un valor máximo único en X = I/N.
 //
-//    B(N,I)(X) has a unique maximum value at X = I/N.
+// B(N,I)(X) tiene un I-fold cero en 0 y N-I fold zero en 1.
 //
-//    B(N,I)(X) has an I-fold zero at 0 and and N-I fold zero at 1.
+// B(N,I)(1/2) = C(N,K) / 2^N
 //
-//    B(N,I)(1/2) = C(N,K) / 2^N
+// Para X y N fijos, los polinomios suman 1:
 //
-//    For a fixed X and N, the polynomials add up to 1:
+// Sum( 0 <= I <= N ) B(N,I)(X) = 1
 //
-//      Sum ( 0 <= I <= N ) B(N,I)(X) = 1
+// Parámetros:
 //
-//  Licensing:
+// Entrada/salida, int &N_DATA. El usuario establece N_DATA en 0 antes de que
+//    	primera llamada. En cada llamada, la rutina incrementa N_DATA en 1 y
+// 	devuelve los datos correspondientes; cuando no hay más datos, el
+// 	el valor de salida de N_DATA volverá a ser 0.
 //
-//    This code is distributed under the GNU LGPL license.
+// Salida, int &N, el grado del polinomio.
 //
-//  Modified:
+// Salida, int &K, el índice del polinomio.
 //
-//    19 August 2004
+// Salida, doble &X, el argumento del polinomio.
 //
-//  Author:
-//
-//    John Burkardt
-//
-//  Reference:
-//
-//    Stephen Wolfram,
-//    The Mathematica Book,
-//    Fourth Edition,
-//    Cambridge University Press, 1999,
-//    ISBN: 0-521-64314-7,
-//    LC: QA76.95.W65.
-//
-//  Parameters:
-//
-//    Input/output, int &N_DATA.  The user sets N_DATA to 0 before the
-//    first call.  On each call, the routine increments N_DATA by 1, and
-//    returns the corresponding data; when there is no more data, the
-//    output value of N_DATA will be 0 again.
-//
-//    Output, int &N, the degree of the polynomial.
-//
-//    Output, int &K, the index of the polynomial.
-//
-//    Output, double &X, the argument of the polynomial.
-//
-//    Output, double &B, the value of the polynomial B(N,K)(X).
+// Salida, double &B, el valor del polinomio B(N,K)(X).
 //
 
 # define N_MAX 15
@@ -753,6 +647,8 @@ double *bernstein_poly_ab_approx(int n, double a, double b, double ydata[], int 
   return yval;
 }
 
+
+#-------------------------------
 double *bernstein_to_legendre(int n){
 //
 //  Purpose:
